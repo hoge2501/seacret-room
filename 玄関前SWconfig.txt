@@ -1,0 +1,94 @@
+sh run
+!
+service password-encryption
+!
+hostname EntranceSW
+!
+no banner motd
+!
+username manager privilege 15 password 8 $1$bJoVec4D$JwOJGPr7YqoExA0GVasdE0
+!
+no service ssh
+!
+platform hwfilter-size ipv4-limited-ipv6
+!
+service telnet
+!
+service http
+!
+no clock timezone
+!
+snmp-server
+!
+!
+aaa authentication enable default local
+aaa authentication login default local
+!
+!
+!
+no stack 1 enable
+!
+ip domain-lookup
+!
+!
+!
+no service dhcp-server
+!
+!
+!
+no ip multicast-routing
+!
+spanning-tree mode rstp
+!
+lacp global-passive-mode enable
+!
+switch 1 provision x510-28
+!
+vlan database
+ vlan 200,1000,4093-4094 state enable
+!
+interface port1.0.1
+ switchport
+ switchport mode access
+!
+interface port1.0.2-1.0.3
+ switchport
+ switchport mode access
+ switchport access vlan 200
+!
+interface port1.0.4
+ switchport
+ switchport mode access
+!
+interface port1.0.5-1.0.6
+ switchport
+ switchport mode access
+ switchport access vlan 1000
+!
+interface port1.0.7-1.0.27
+ switchport
+ switchport mode access
+!
+interface port1.0.28
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan add 200,1000,4093-4094
+!
+line con 0
+line vty 0 4
+!
+end
+
+EntranceSW#
+EntranceSW#
+EntranceSW#write mem
+Building configuration...
+[OK]
+EntranceSW#
+EntranceSW#
+EntranceSW#
+EntranceSW#exit
+
+
+EntranceSW login: 
+EntranceSW login: 
